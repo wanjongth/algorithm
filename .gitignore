@@ -1,0 +1,7 @@
+## Ignore File ##
+
+*.log
+*.bak
+
+.DS_Store
+.idea/
