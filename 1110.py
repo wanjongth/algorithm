@@ -18,43 +18,38 @@
 #         break #while문 빠져나옴
 # print(count)
 
+#코드2
+i = int(input())
 
-# # 채수연님 코드
-# i = list(map(int,input())) # [ 2, 6 ]
+N = i #26
+count = 0
+while True:
 
-# count = 0
-# N = i
-# firstNumber = 0
-# secondNumber = 0
-# result = 0
+    if i < 10 :
+        firstNumber = i
+        firstNumber = str(firstNumber)
+    else :
+        firstNumber = i%10 #6
+        firstNumber = str(firstNumber) #"6"
 
-# while True:
-#     if len(i) == 1 :
-#         i = "0"+str(firstNumber)
-#         firstNumber = i[1]
-#         firstNumber = str(firstNumber)
-#     else :
-#         firstNumber = i[1] # [6]
-#         firstNumber = str(firstNumber) # "6"
+    result = i//10 + i%10 # 2 + 6 =8
 
-#     result = sum(i) # 8
-#     result = str(result) # "8"
-#     if len(result) == 1 :
-#         result = "0"+result # "0", "8"
-#         secondNumber = result[1] # "8"
-#     else :
-#         secondNumber = result[1]
+    if i < 10 :
+        secondNumber = str(result) # "8"
+    else :
+        secondNumber = result%10
+        secondNumber = str(secondNumber)
 
-#     finalNumber = firstNumber + secondNumber # "6" + "8" >> 68
-#     i = list(map(int,finalNumber)) # [6,8]
+    finalNumber = firstNumber + secondNumber # "6"+"8"
+    i = int(finalNumber)
 
-#     count += 1
-#     # print(count)
+    count += 1
     
-#     if N == i:
-#         break;
+    if N == i:
+        break;
+print(count)
 
-# print(count)
+# 코드3
 
 # a=input()              #26   int를 list로 저장 x
 # if int(a)<10:

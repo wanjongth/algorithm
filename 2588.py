@@ -29,7 +29,7 @@ print(a * (b//10%10))
 print(a * (b//100))
 print(a * b)
 
-# # 채수연님 코드
+# # 코드2
 # # 변수 입력
 # a = input()
 # b = input()
@@ -47,7 +47,7 @@ print(a * b)
 # print(a*e)
 # print(a*c+(a*d*10)+(a*e*100))
 
-# # 권규현님 코드
+# # 코드3
 # a = int(input())
 # b = list(map(int,input()))
 
