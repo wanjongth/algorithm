@@ -1,18 +1,22 @@
+
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
 
+
 node = Node(3)
 first_node = Node(4)
-node.text = first_node
+node.next = first_node
+
 
 # print(node.data)
+
 
 class LinkedList:
     def __init__(self, data):
         self.head = Node(data)
-    
+
     def append(self, data):
         cur = self.head
         while cur.next is not None:
