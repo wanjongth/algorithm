@@ -1,4 +1,4 @@
-#리스트 관련 메서드
+# 리스트 관련 메서드
 a = [1, 4, 3]
 print("기본 리스트:", a)
 
@@ -38,5 +38,11 @@ a = [1, 2, 3, 4, 5, 5, 5]
 remove_set = {3, 5}
 
 # remove_set에 포함되지 않은 값만을 저장
-result = [i for i in a if i not in remove_set] # a에 포함된 원소를 하나씩 확인하며 그 원소가 remove_set에 포함되지 않을때만 result에 넣음
+# a에 포함된 원소를 하나씩 확인하며 그 원소가 remove_set에 포함되지 않을때만 result에 넣음
+result = [i for i in a if i not in remove_set]
 print(result)
+
+# del 객체
+a = [1, 2, 3, 4, 5]
+del a[2:]
+print(a)
