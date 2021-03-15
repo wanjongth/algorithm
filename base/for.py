@@ -6,7 +6,7 @@ result = 0
 
 # i는 1부터 9까지의 모든 값을 순회
 # range() - range(시작 값, 끝 값 + 1) 형태
-for i  in range(1, 10):
+for i in range(1, 10):
     result += i
 print(result)
 
@@ -36,3 +36,27 @@ for i in range(2, 10):
     for j in range(1, 10):
         print(i, "X", j, i * j)
     print()
+
+
+# enumerate(t) : 인덱스 번호와 컬렉션의 원소를 튜플 형태로 반환
+# # t = [1, 5, 7, 33, 39, 52]
+# for p in enumerate(t):
+#     print(p)
+# ...
+# (0, 1)
+# (1, 5)
+# (2, 7)
+# (3, 33)
+# (4, 39)
+# (5, 52)
+
+# tuple형태 반환을 이용하여 아래처럼 활용할 수 있음
+# for i, v in enumerate(t):
+#     print("index : {}, value: {}".format(i,v))
+# ...
+# index : 0, value: 1
+# index : 1, value: 5
+# index : 2, value: 7
+# index : 3, value: 33
+# index : 4, value: 39
+# index : 5, value: 52

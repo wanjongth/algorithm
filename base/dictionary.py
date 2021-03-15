@@ -31,3 +31,6 @@ for key in key_list:
 print(data.get('사과'))
 # dic.get은 dic[key] 처럼 value값을 출력하지만
 # 존재 하지 않는 키 호출했을 때 get은 None을, 후자는 에러를 반환한다.
+
+a = dict()
+print(a)
