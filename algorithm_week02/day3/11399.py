@@ -21,6 +21,13 @@ for index, time in enumerate(times):
     result += (index+1) * time
 print(result)
 
+# 방법 2
+# wait_time = 0
+# sum_time = 0
+# for i in time:
+#     wait_time += i
+#     sum_time += wait_time
+# print(sum_time)
 
 # for i, v in enumerate(t):
 #     print("index : {}, value: {}".format(i,v))
