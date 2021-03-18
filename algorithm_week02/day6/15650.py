@@ -1,4 +1,4 @@
-# # N과 M(2) - 백트레킹
+# # N과 M(2) - 백트래킹
 # # 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구해라
 # # 1부터 N까지 자연수 중 중복 없이 M개를 고른 오름차순 수열
 
@@ -21,7 +21,7 @@
 # #백트레킹
 n, m = map(int, input().split())
 
-check = [False for i in range(n+1)]  # 특정 수가 쓰였는지 체크
+check = [False for _ in range(n+1)]  # 특정 수가 쓰였는지 체크
 # start 때문에 인덱스 1부터 사용하기 위해 n+1 길이로 생성
 # print(check)
 array = []  # 수열을 담을 배열
@@ -37,7 +37,7 @@ def n_and_m(k, start):  # 전 문제와 다른점. 오름차순을 위해 start�
             check[i] = True  # 쓴걸로 처리하고
             array.append(i)  # 배열에 담는다
 
-            n_and_m(k+1, i+1)  # k를 증가시키고 재귀
+            n_and_m(k+1, i)  # k를 증가시키고 재귀
             check[i] = False  # 초기화
             array.pop()  # 초기화
 

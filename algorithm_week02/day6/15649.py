@@ -1,11 +1,11 @@
-# N과 M(2) - 백트레킹
+# N과 M(2) - 백트래킹
 # 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구해라
 # 1부터 N까지 자연수 중 중복 없이 M개를 고른 수열 출력
 
 n, m = map(int, input().split())
 
 check = [False for i in range(n)]
-print(check)
+# print(check)
 array = []
 
 
