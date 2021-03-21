@@ -14,7 +14,7 @@ x = int(input())
 dp = [0] * 30001
 
 # dp bottom up
-for i in range(1, x + 1):
+for i in range(2, x + 1):
     # 현재의 수에서 1을 빼는 경우
     dp[i] = dp[i - 1] + 1
     # 현재의 수가 2로 나누어 떨어지는 경우
