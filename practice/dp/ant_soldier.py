@@ -18,7 +18,7 @@
 n = int(input())
 k = list(map(int, input().split()))
 
-dp = [0]*100
+dp = [0]*100  # n의 범위 만큼 초기화
 
 dp[0] = k[0]
 dp[1] = max(k[0], k[1])
