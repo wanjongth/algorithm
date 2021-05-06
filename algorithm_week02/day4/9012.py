@@ -75,7 +75,6 @@ def bracket(string):
     for bracket in string:
         if len(stack) == 0 and bracket == ')':
             return 'NO'
-
         if bracket == '(':
             stack.append(bracket)
         else:
