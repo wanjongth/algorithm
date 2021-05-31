@@ -145,3 +145,5 @@ dmypy.json
 
 # prof img
 static/profile_pics
+
+.DS_Store
