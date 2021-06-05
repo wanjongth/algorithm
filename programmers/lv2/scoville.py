@@ -46,24 +46,4 @@ def solution(scoville, K):
 print(solution([1, 2, 3, 9, 10, 12], 7))
 
 
-# 큐로 다시 구현 시도 - 시간은 줄고, 테스트케이스 아직 통과 못함
-
-
-def solution(scoville, K):
-    scoville = deque(scoville)
-    cnt = 0
-
-    while len(scoville) > 0:
-        scoville.sort()
-        if scoville[0] >= K:
-            return cnt
-        a = scoville.popleft()
-        if len(scoville) != 0:
-            b = scoville.popleft()
-            scoville.appendleft(a + (b*2))
-        cnt += 1
-
-    return -1
-
-
-print(solution([1, 2, 3, 9, 10, 12], 7))
+# deque을 다시 사용하게 되면 정렬을 해주어야 하는데, 시간초과, 우선순위큐인 힙을 사용하자
