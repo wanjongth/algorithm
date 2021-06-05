@@ -7,7 +7,6 @@
 
 # # 시간초과, 테스트케이스 불통과
 # from collections import deque
-
 # def solution(scoville, K):
 #     scoville.sort()
 #     scoville = deque(scoville)
@@ -51,11 +50,11 @@ print(solution([1, 2, 3, 9, 10, 12], 7))
 
 
 def solution(scoville, K):
-    scoville.sort()
     scoville = deque(scoville)
     cnt = 0
 
     while len(scoville) > 0:
+        scoville.sort()
         if scoville[0] >= K:
             return cnt
         a = scoville.popleft()
