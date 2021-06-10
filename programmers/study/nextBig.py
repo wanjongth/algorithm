@@ -44,3 +44,21 @@ print(solution(15))
 print(solution(78))
 
 # 다른사람 풀이보니 bin이라는 함수가 있었음 -> 2진법 변환
+
+
+def solution(n):
+    answer = 0
+    one_cnt = bin(n).count('1')
+    for i in range(n+1, 1000001):
+        if one_cnt == bin(i).count('1'):
+            answer = i
+            break
+    return answer
+
+
+# oct()  # 8진법
+# hex()  # 16진법
+# format(value, 진법)도 있음
+
+print(solution(15))
+print(solution(78))

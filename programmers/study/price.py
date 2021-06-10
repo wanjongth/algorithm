@@ -14,24 +14,31 @@
 
 #     return answer
 
-# # 시간초과
-# def solution(prices):
-#     answer = []
+# 시간초과
+from collections import deque
 
-#     for i in range(len(prices)):
-#         cnt = 0
-#         for j in prices[i:]:
-#             if prices[i] <= j:
-#                 cnt += 1
-#             else:
-#                 cnt += 1
-#                 break
 
-#         answer.append(cnt-1)
+def solution(prices):
+    answer = []
 
-#     return answer
+    for i in range(len(prices)):
+        cnt = 0
+        for j in prices[i:]:
+            if prices[i] <= j:
+                cnt += 1
+            else:
+                cnt += 1
+                break
+
+        answer.append(cnt-1)
+
+    return answer
+
+# 슬라이싱 말고 범위지정해보기
 
 # 스택 사용 -> 값이 아닌 가격의 인덱스를 스택에 넣었다가 뻄
+
+
 def solution(prices):
     answer = [0] * len(prices)
     stack = [0]
@@ -53,3 +60,20 @@ print(solution([1, 2, 3, 2, 3]))
 # 테스트 케이스
 print(solution([1, 2, 3, 2, 3, 1]))
 # return -> 5 4 1 2 1 0
+
+
+def solution(prices):
+    answer = []
+
+    prices = deque(prices)  # que로 캐스팅
+    while prices:
+        cnt = 0
+        price = prices.popleft()  # First Out
+
+        for i in prices:
+            cnt += 1  # 카운팅
+            if price > i:
+                break
+
+        answer.append(cnt)
+    return answer

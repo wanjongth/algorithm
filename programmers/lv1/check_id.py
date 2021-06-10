@@ -19,43 +19,44 @@ def solution(new_id):
         if not (i.islower() or i.isdigit() or i == '-' or i == '_' or i == '.'):
             new_id = new_id.replace(i, '')
 
-    # # 3
-    # for i in range(0, len(new_id)-1):
-    #     if new_id[i] == '.' and new_id[i+1] == '.':
-    #         # new_id = new_id.replace(new_id[i], '')
-    #         print(new_id)
+    # 3 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
+    while '..' in new_id:
+        new_id = new_id.replace('..', '.')
 
-    new_id = re.sub('\.\.+', '.', new_id)
+    # 정규표현식
+    # new_id = re.sub('\.\.+', '.', new_id)
 
-    # # 4
-    # if new_id[0] == '.':
-    #     new_id = new_id.replace(new_id[0], '')
-    # if new_id[-1] == '.':
-    #     new_id = new_id.replace(new_id[-1], '')
+    # 4
+    if new_id[0] == '.':
+        new_id = new_id[1:]
+    if new_id[-1] == '.':
+        new_id = new_id[:-1]
 
-    new_id = re.sub('^\.|\.$', '', new_id)
+    # # 정규표현식
+    # new_id = re.sub('^\.|\.$', '', new_id)
 
     # 5
     if new_id == '':
         new_id = 'a'
 
-    # # 6
+    # 6
     # if len(new_id) >= 16:
     #     new_id = new_id[0:15]
     #     if new_id[-1] == '.':
-    #         new_id = new_id.replace(new_id[-1], '')
+    #         # replace -> 해당하는 것을 다 지운다(new_id[-1]). 그래서 테케 통과 못함
+    #         # new_id = new_id.replace(new_id[-1:], '')
+    #         new_id = new_id[0:14]
 
+    # 정규표현식
     new_id = re.sub('\.$', '', new_id[0:15])
 
     # 7
-    if len(new_id) < 3:
-        while len(new_id) < 3:
-            new_id += new_id[-1:]
+    # if len(new_id) < 3:
+    while len(new_id) < 3:  # while문 안의 조건은 true 때만 수행되므로 윗줄이 필요 없었다.
+        new_id += new_id[-1:]
 
     return new_id
 
 
-print(solution("a.."))
-print(solution("a,,"))
-print(solution("b..."))
-print(solution("..aasd"))
+print(solution("bat....y.abcdefghjklm"))
+print(solution("....bat.y.abcdefghjklm..."))
