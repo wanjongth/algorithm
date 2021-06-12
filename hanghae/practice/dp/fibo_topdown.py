@@ -22,4 +22,4 @@ def fibo(x):
     return d[x]
 
 
-print(fibo(50))
+print(fibo(5))
