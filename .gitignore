@@ -147,3 +147,5 @@ dmypy.json
 static/profile_pics
 
 .DS_Store
+
+.vscode/
