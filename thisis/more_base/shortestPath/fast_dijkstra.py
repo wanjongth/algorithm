@@ -16,7 +16,7 @@ n, m = map(int, input().split())
 # 시작 노드
 start = int(input())
 # 각 노드에 연결되어 있는 노드에 대한 정보
-graph = [[] for i in range(n+1)]
+graph = [[] for _ in range(n+1)]
 # 최단 거리 테이블
 distance = [INF] * (n+1)
 
@@ -57,3 +57,18 @@ for i in range(1, n + 1):
         print(distance[i])
 
 # 시간 복잡도 -> O(ElogV)
+
+# 입력 예
+# 6 11
+# 1
+# 1 2 2
+# 1 3 5
+# 1 4 1
+# 2 3 3
+# 2 4 2
+# 3 2 3
+# 3 6 5
+# 4 3 3
+# 4 5 1
+# 5 3 1
+# 5 6 2
