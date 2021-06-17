@@ -19,7 +19,7 @@ for a in range(1, n+1):
 
 # 각 간선의 정보 입력받아 그 값으로 초기화
 for _ in range(m):
-    a, b, c, = map(int, input().split())
+    a, b, c = map(int, input().split())
     graph[a][b] = c
 
 # 점화식에 따라 플로이드 워셜 알고리즘 수행
