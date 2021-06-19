@@ -149,3 +149,5 @@ static/profile_pics
 .DS_Store
 
 .vscode/
+
+test/
