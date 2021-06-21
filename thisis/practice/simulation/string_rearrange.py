@@ -20,7 +20,7 @@ answer += str(num)
 print(answer)
 
 # 답안
-# 생각하지 못환 것, num이 없을 경우 0이 붙게 됨
+# 생각하지 못한 것, num이 없을 경우 0이 붙게 됨
 
 data = input()
 result = []
