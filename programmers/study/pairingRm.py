@@ -7,32 +7,62 @@
 # 문자열 S가 주어졌을 때, 짝지어 제거하기를 성공적으로 수행할 수 있는지 반환하는 함수를 완성해 주세요.
 # 성공적으로 수행할 수 있으면 1을, 아닐 경우 0을 리턴해주면 됩니다.
 
+
+# 제일 처음 들어간 b가 나중에 만나는 b와 만나 없어질 수 있음
+# 들어간 대로 나오는 것이 아니므로 스택 이용
+
+# 틀린 코드
+# def solution(s):
+#     answer = 1
+
+#     # 홀수면 수행 불가
+#     if len(s) % 2 == 1:
+#         return 0
+
+#     stack = []
+#     for i in range(len(s)):
+#         if s[i] == s[i-1]:
+#             stack.append(s[i])
+#             stack.append(s[i-1])
+#             break
+
+#     s = s[:i-1] + s[i+1:]
+
+#     if stack == []:
+#         answer = 0
+
+#     while stack:
+#         stack.pop()
+#         stack.pop()
+#         for i in range(len(s)):
+#             if s[i] == s[i-1]:
+#                 stack.append(s[i])
+#                 stack.append(s[i-1])
+#             break
+#         s = s[:i-1] + s[i+1:]
+
+#     return answer
+
+
 def solution(s):
-    answer = 1
-
     stack = []
-    for i in range(len(s)):
-        if s[i] == s[i-1]:
-            stack.append(s[i])
-            stack.append(s[i-1])
-            break
+    # 홀수면 수행 불가
+    if len(s) % 2 == 1:
+        return 0
 
-    s = s[:i-1] + s[i+1:]
+    for i in s:
+        if len(stack) == 0:  # if not stack:
+            stack.append(i)
+        else:  # if stack:
+            if(stack[-1] == i):  # 같으면
+                stack.pop()  # pop
+            else:  # 다르면 append
+                stack.append(i)
 
-    if stack == []:
-        answer = 0
-
-    while stack:
-        stack.pop()
-        stack.pop()
-        for i in range(len(s)):
-            if s[i] == s[i-1]:
-                stack.append(s[i])
-                stack.append(s[i-1])
-            break
-        s = s[:i-1] + s[i+1:]
-
-    return answer
+    if len(stack) == 0:
+        return 1
+    else:
+        return 0
 
 
 print(solution('baabaa'))
