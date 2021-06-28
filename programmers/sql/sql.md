@@ -1,4 +1,4 @@
-프로그래머스 mysql 언어 lv 3 까지
+프로그래머스 mysql 언어
 
 ## where
 
@@ -134,4 +134,26 @@ WHERE HOST_ID IN (
     GROUP BY HOST_ID
     HAVING COUNT(ID) >= 2)
 ORDER BY ID
+```
+
+## Level 4
+
+### 우유와 요거트가 담긴 장바구니
+
+요거트가 담긴 목록, 우유가 담긴 목록을 뽑고, CART ID가 같은것을 출력
+
+```sql
+ SELECT A.CART_ID FROM
+ (SELECT CART_ID FROM CART_PRODUCTS WHERE NAME = 'Yogurt') as A,
+ (SELECT CART_ID FROM CART_PRODUCTS WHERE NAME = 'Milk') as B
+ WHERE A.CART_ID = B.CART_ID ORDER BY CART_ID
+```
+
+### 보호소에서 중성화한 동물
+
+보호소에서 들어올 당시엔 중성화 안되어있고, 나갈 당시 중성화 된 동물 찾기.
+
+```sql
+SELECT O.ANIMAL_ID, O.ANIMAL_TYPE, O.NAME FROM ANIMAL_OUTS O JOIN ANIMAL_INS I ON O.ANIMAL_ID = I.ANIMAL_ID
+WHERE I.SEX_UPON_INTAKE LIKE 'Intact%' AND (O.SEX_UPON_OUTCOME LIKE 'Spayed%' OR O.SEX_UPON_OUTCOME LIKE 'Neutered%')
 ```
