@@ -37,7 +37,9 @@ def solution(land):
         land[i+1][2] += max(land[i][0], land[i][1], land[i][3])
         land[i+1][3] += max(land[i][0], land[i][1], land[i][2])
     # 바로 위에 코드가 똑같은 코드다. N-1행에서의 최대값을 가지는 열 answer에 대입한다.
+    print(land)
     answer = max(land[N-1])
+
     # answer = max(land[N-1][0],land[N-1][1],land[N-1][2],land[N-1][3])
 
     return answer
