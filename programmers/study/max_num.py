@@ -27,23 +27,34 @@
 
 #     return answer
 
+# def solution(numbers):
+#     answer = ''
+
+#     numbers = list(map(str, numbers))
+
+#     for j in range(9, -1, -1):
+#         for i in numbers:
+#             for k in range(0, len(i)):
+#                 # print('자릿수')
+#                 # print(int(i[k]))
+#                 # print('숫자')
+#                 # print(j)
+#                 if int(i[k]) == j:
+#                     answer += i
+#                     break
+#     # print(answer)
+#     return answer
+
 def solution(numbers):
-    answer = ''
-
     numbers = list(map(str, numbers))
+    numbers.sort(key=lambda x: x*3, reverse=True)
+    print(numbers)
 
-    for j in range(9, -1, -1):
-        for i in numbers:
-            for k in range(0, len(i)):
-                # print('자릿수')
-                # print(int(i[k]))
-                # print('숫자')
-                # print(j)
-                if int(i[k]) == j:
-                    answer += i
-                    break
-    # print(answer)
-    return answer
+    return str(int(''.join(numbers)))  # [0,0,0,0] 인 경우
+
+# 다른사람 풀이.
+# 문자열 비교연산의 경우엔 첫번째 인덱스인 666[0]인 6과 101010[0]인 1과 222[0]인 2를 ascii숫자로 바꿔서 비교
+# 물론 같으면, 다음 인덱스도 비교. 비교한 결과 [6, 2, 10]의 순으로 정렬
 
 
 print(solution([6, 10, 2]))

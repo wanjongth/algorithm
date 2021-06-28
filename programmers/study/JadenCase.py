@@ -1,4 +1,4 @@
-# JadenCase 만들기\
+# JadenCase 만들기 - 문자열 - 12951
 # JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다.
 # 문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
 
@@ -31,16 +31,18 @@
 # continue로 처리 - 성공
 def solution(s):
     answer = ''
-
+    # 모두 소문자로
     s = s.lower()
-    # 첫번째 문자열 처리
+    # 첫번째 글자
     if s[0].islower():
         s = s[0].upper() + s[1:]
 
     for i in range(len(s)):
+        # 이전 인덱스의 값이 공백이면서 현재 인덱스의 값이 소문자인경우
         if s[i-1] == " " and s[i].islower():
             answer += s[i].upper()
             continue
+        # 나머지는 그대로 붙여준다
         answer += s[i]
 
     return answer

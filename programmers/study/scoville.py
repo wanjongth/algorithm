@@ -34,21 +34,21 @@ def solution(scoville, K):
         answer += 1
     return -1
 
-# 시간초과, 테스트케이스 불통과
+# # 시간초과, 테스트케이스 불통과
 
 
-def solution(scoville, K):
-    scoville.sort()
-    scoville = deque(scoville)
-    cnt = 0
+# def solution(scoville, K):
+#     scoville.sort()
+#     scoville = deque(scoville)
+#     cnt = 0
 
-    while min(scoville) <= K:
-        if min(scoville) == 0:
-            return -1
+#     while min(scoville) <= K:
+#         if min(scoville) == 0:
+#             return -1
 
-        scoville.appendleft(scoville.popleft()+(scoville.popleft()*2))
-        cnt += 1
-    return cnt
+#         scoville.appendleft(scoville.popleft()+(scoville.popleft()*2))
+#         cnt += 1
+#     return cnt
 
 # print(solution([1, 2, 3, 9, 10, 12], 7))
 
