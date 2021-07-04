@@ -1,8 +1,8 @@
 # 내가 제일 많이 만나는 에러. - IndexError
 # 슬라이싱은 IndexError가 안난다고함. -> check
 # 왜지..?
-str = '1232131'
-print(str[123141:])
+abc = '1232131'
+print(abc[123141:])
 
 # 리스트에 문자열처럼 연산자 활용을 많이 안했었던거 같다. (+, * ..)
 print([1, 2, 3] + [4, 5, 6])
@@ -29,3 +29,17 @@ a.remove(7)
 
 a = []  # 다시 초기화
 a.clear()  # 특별한 경우...
+
+# format 문 Remind
+numbers = [1, 22, 333, 4444, 55555]
+
+for number in numbers:
+    print("{}는 {}자리수입니다.".format(number, len(str(number))))
+
+
+# 2차원 행렬 값넣기
+numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+output = [[], [], []]
+for number in numbers2:
+    output[(number - 1) % 3].append(number)  # 인덱스 접근 확인
+print(output)
