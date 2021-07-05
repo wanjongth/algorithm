@@ -1,6 +1,12 @@
+# import time
+# time
+# 처음 = time.time()
+# while 처음 + 5 >= time.time():
+#     pass
+# print('5초있다가 출력')
+
 # 가장 큰 수 만들기 - Remind
-from abc import abstractproperty
-import time
+
 max_value = 0
 a = 0
 b = 0
@@ -19,12 +25,6 @@ print(a, b, max_value)
 # python continue 쓰는 이유 ?
 # 다른 언어에서는 continue 키워드를 잘 쓰지 않는다고 한다. -> 들여쓰기 줄이기 위해 사용한다고 함
 '''
-
-# time
-# 처음 = time.time()
-# while 처음 + 5 >= time.time():
-#     pass
-# print('5초있다가 출력')
 
 # 반복문 거꾸로 돌리기
 # 이제까지는 쓸 일이 있으면 range(시작,끝-1,-1)로 돌렸었는데

@@ -22,17 +22,19 @@
 # print(my_set)
 # print(len(my_set))
 
-from itertools import permutations
+# from itertools import permutations
 
-# print(permutations('12', 2))
-# for i in range(1, 3):
-#     print(permutations('12', i))
-my_list = [1, 2, 3, 4, 5]
-for i in my_list:
-    print(i)
+# # print(permutations('12', 2))
+# # for i in range(1, 3):
+# #     print(permutations('12', i))
+# my_list = [1, 2, 3, 4, 5]
+# for i in my_list:
+#     print(i)
 
-for i, v in enumerate(my_list):
-    print('인덱스는')
-    print(i)
-    print('밸류는')
-    print(v)
+# for i, v in enumerate(my_list):
+#     print('인덱스는')
+#     print(i)
+#     print('밸류는')
+#     print(v)
+
+print('abcd' in 'abcd')
