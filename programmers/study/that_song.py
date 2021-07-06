@@ -19,10 +19,25 @@ import datetime
 
 def solution(m, musicinfos):
     # musicinfos에서 재생시간을 구한다......
+
+    # 00:00 처리 안먹힘
+    # for musicinfo in musicinfos:
+    #     if datetime.datetime.strptime(musicinfo.split(',')[1], '%H:%M') < datetime.datetime.strptime(musicinfo.split(',')[0], '%H:%M'):
+    #         # print(musicinfo.split(',')[1])
+    #         musicinfo = musicinfo[:6] + '00:00' + musicinfo[11:]
+    # print(musicinfos)
+
     times = [(datetime.datetime.strptime(i.split(
         ',')[1], '%H:%M') - datetime.datetime.strptime(i.split(',')[0], '%H:%M')).seconds//60 for i in musicinfos]
 
-    # print(times)
+    print(times)
+    for i in range(len(musicinfos)):
+        if datetime.datetime.strptime(musicinfos[i].split(',')[1], '%H:%M') < datetime.datetime.strptime(musicinfos[i].split(',')[0], '%H:%M'):
+            times[i] -= (int(musicinfos[i].split(',')[1][:2]) *
+                         60+int(musicinfos[i].split(',')[1][3:]))
+            # print(int(musicinfos[i].split(',')[1][:2]) *
+            #       60+int(musicinfos[i].split(',')[1][3:]))
+    print(times)
 
     # melody를 재생시간만큼 반복시켜 구한다..
     melodys = []
@@ -100,7 +115,7 @@ def solution(m, musicinfos):
 #     solution('ABCDEFG', ["12:00,12:14,HELLO,CDEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
 # print(solution('CC#BCC#BCC#BCC#B', [
 #       "03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"]))
-print(
-    solution('ABC#', ["12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
 # print(
-#     solution('ABC#', ["12:15,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
+#     solution('ABC#', ["12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
+print(
+    solution('ABC#', ["12:15,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
