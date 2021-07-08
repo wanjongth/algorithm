@@ -20,10 +20,10 @@ def solution(priorities, location):
     answer = 0
     q = deque((v, i) for i, v in enumerate(priorities))
 
-    while len(q):
+    while q:
         item = q.popleft()
         # q에 남아 있고, 최댓값이 뽑은값보다 큰 경우
-        if len(q) > 0 and max(q)[0] > item[0]:
+        if q and max(q)[0] > item[0]:
             # 제일 뒤로 추가
             q.append(item)
         else:
