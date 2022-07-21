@@ -1,6 +1,6 @@
-# python algorithm
+# Algorithm
 
-python을 활용한 알고리즘 풀이, 공부 내용 저장소
+알고리즘 풀이, 공부 내용 저장소
 
 ## 포함 내용
 
