@@ -7,7 +7,187 @@ import java.io.InputStreamReader;
 public class DpMain {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(new DP11727().solution(Integer.parseInt(br.readLine())));
+        System.out.println(new DP2193().solution(Integer.parseInt(br.readLine())));
+    }
+}
+
+class DP2193 {
+    /**
+     이친수
+
+     문제
+     0과 1로만 이루어진 수를 이진수라 한다. 이러한 이진수 중 특별한 성질을 갖는 것들이 있는데,
+     이들을 이친수(pinary number)라 한다. 이친수는 다음의 성질을 만족한다.
+
+     이친수는 0으로 시작하지 않는다.
+     이친수에서는 1이 두 번 연속으로 나타나지 않는다. 즉, 11을 부분 문자열로 갖지 않는다.
+     예를 들면 1, 10, 100, 101, 1000, 1001 등이 이친수가 된다. 하지만 0010101이나 101101은 각각 1, 2번 규칙에 위배되므로 이친수가 아니다.
+
+     N(1 ≤ N ≤ 90)이 주어졌을 때, N자리 이친수의 개수를 구하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 N이 주어진다.
+
+     출력
+     첫째 줄에 N자리 이친수의 개수를 출력한다.
+     */
+
+    public long solution(int n) {
+        // 범위가 90까지 이므로, 충분히 큰 정수를 담을 수 있게 long arr로 선언해야 한다.
+        long[] dp = new long[n + 2];
+
+        dp[1] = 1;
+        dp[2] = 1;
+
+        for (int i = 3; i < n + 2; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+
+//        System.out.println("Arrays.toString(dp) = " + Arrays.toString(dp));
+        return dp[n];
+    }
+}
+
+class DP11057 {
+    /**
+     오르막 수
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	256 MB	45707	22328	17257	47.633%
+     문제
+     오르막 수는 수의 자리가 오름차순을 이루는 수를 말한다. 이때, 인접한 수가 같아도 오름차순으로 친다.
+
+     예를 들어, 2234와 3678, 11119는 오르막 수이지만, 2232, 3676, 91111은 오르막 수가 아니다.
+
+     수의 길이 N이 주어졌을 때, 오르막 수의 개수를 구하는 프로그램을 작성하시오. 수는 0으로 시작할 수 있다.
+
+     입력
+     첫째 줄에 N (1 ≤ N ≤ 1,000)이 주어진다.
+
+     출력
+     첫째 줄에 길이가 N인 오르막 수의 개수를 10,007로 나눈 나머지를 출력한다.
+     */
+
+    public long solution(int n) {
+        if (n == 1) {
+            return 10;
+        }
+
+        int mod = 10007;
+
+        long answer = 0;
+
+        long[][] dp = new long[n + 1][11];
+
+        for (int i = 0; i < 11; i++) {
+            dp[1][i] = 1;
+        }
+
+        for (int i = 2; i < n+1; i++) {
+            for (int j = 1; j < 11; j++) {
+                dp[i][j] = (dp[i -1][j] + dp[i][j-1]) % mod;
+            }
+        }
+
+        for (int i = 0; i < 11; i++) {
+            answer += dp[n][i];
+        }
+
+        return answer % mod;
+    }
+}
+
+class DP10844 {
+    /**
+     문제
+     45656이란 수를 보자.
+
+     이 수는 인접한 모든 자리의 차이가 1이다. 이런 수를 계단 수라고 한다.
+
+     N이 주어질 때, 길이가 N인 계단 수가 총 몇 개 있는지 구해보자. 0으로 시작하는 수는 계단수가 아니다.
+
+     입력
+     첫째 줄에 N이 주어진다. N은 1보다 크거나 같고, 100보다 작거나 같은 자연수이다.
+
+     출력
+     첫째 줄에 정답을 1,000,000,000으로 나눈 나머지를 출력한다.
+
+     */
+
+    public long solution(int n) {
+        long answer = 0;
+        long mod = 1000000000;
+
+        long[][] dp = new long[n + 1][10];
+
+        for (int i = 1; i < 10; i++) {
+            dp[1][i] = 1;
+        }
+
+        for (int i = 2; i < n+1; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == 0) {
+                    dp[i][j] = (dp[i-1][j+1]) % mod;
+                } else if (j == 9){
+                    dp[i][j] = (dp[i-1][j-1]) % mod;
+                } else {
+                    dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % mod;
+                }
+            }
+        }
+
+        for (int i = 0; i < 10; i++) {
+            answer += dp[n][i];
+//            System.out.println("dp[n][i] = " + dp[n][i]);
+        }
+
+
+        return answer%mod;
+    }
+}
+
+class DP9095 {
+    /**
+     문제
+     정수 4를 1, 2, 3의 합으로 나타내는 방법은 총 7가지가 있다. 합을 나타낼 때는 수를 1개 이상 사용해야 한다.
+
+     1+1+1+1
+     1+1+2
+     1+2+1
+     2+1+1
+     2+2
+     1+3
+     3+1
+     정수 n이 주어졌을 때, n을 1, 2, 3의 합으로 나타내는 방법의 수를 구하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 테스트 케이스의 개수 T가 주어진다. 각 테스트 케이스는 한 줄로 이루어져 있고, 정수 n이 주어진다. n은 양수이며 11보다 작다.
+
+     출력
+     각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 출력한다.
+
+     예제 입력 1
+     3
+     4
+     7
+     10
+     예제 출력 1
+     7
+     44
+     274
+     */
+
+    public int solution(int n) {
+        int dp[] = new int[11];
+
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+
+
+        for (int i = 4; i <= n ; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+        }
+        return dp[n];
     }
 }
 
