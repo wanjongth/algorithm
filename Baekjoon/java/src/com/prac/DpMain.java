@@ -9,7 +9,302 @@ public class DpMain {
     public static void main(String[] args) throws IOException {
 //        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //        System.out.println(new DP9465().solution());
-        new DP9465().input();
+        new DP11054().input();
+    }
+}
+
+class DP11054 {
+    /**
+     가장 긴 바이토닉 부분 수열
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	256 MB	42934	21925	17145	50.716%
+
+     문제
+     수열 S가 어떤 수 Sk를 기준으로 S1 < S2 < ... Sk-1 < Sk > Sk+1 > ... SN-1 > SN을 만족한다면, 그 수열을 바이토닉 수열이라고 한다.
+
+     예를 들어, {30}과 {40}, {50} 은 바이토닉 수열이지만,
+     {1, 2, 3, 2, 1, 2, 3, 2, 1}과 {10, 20, 30, 40, 20, 30} 은 바이토닉 수열이 아니다.
+
+     수열 A가 주어졌을 때, 그 수열의 부분 수열 중 바이토닉 수열이면서 가장 긴 수열의 길이를 구하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 수열 A의 크기 N이 주어지고, 둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ N ≤ 1,000, 1 ≤ Ai ≤ 1,000)
+
+     출력
+     첫째 줄에 수열 A의 부분 수열 중에서 가장 긴 바이토닉 수열의 길이를 출력한다.
+
+     예제 입력 1
+     10
+     1 5 2 1 4 3 4 5 2 1
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        System.out.println(solution(n, arr));
+    }
+
+    private int solution(int n, int[] arr) {
+        int[] uDp = new int[n];
+        int[] dDp = new int[n];
+
+        for (int i = 0; i < n ; i++) {
+            // 증가하는 부분수열의 길이
+            uDp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j] && uDp[i] < uDp[j] + 1) {
+                    uDp[i] = uDp[j] + 1;
+                }
+            }
+        }
+        // 방향을 바꿔서 증가하는 수열을 구해야 한다.
+        for (int i = n - 1; i >= 0 ; i--) {
+            // 감소하는 부분수열의 길이
+            dDp[i] = 1;
+            for (int j = n - 1; j >= i; j--) {
+                if (arr[i] > arr[j] && dDp[i] < dDp[j] + 1) {
+                    dDp[i] = dDp[j] + 1;
+                }
+            }
+        }
+
+//        System.out.println(Arrays.toString(uDp));
+//        System.out.println(Arrays.toString(dDp));
+        int max = 1;
+        for (int i = 0; i < n; i++) {
+            int sum = uDp[i] + dDp[i] - 1;
+            if (sum > max) {
+                max = sum;
+            }
+        }
+
+        return max;
+    }
+}
+
+class DP11722 {
+    /**
+     가장 긴 감소하는 부분 수열
+
+     문제
+     수열 A가 주어졌을 때, 가장 긴 감소하는 부분 수열을 구하는 프로그램을 작성하시오.
+
+     예를 들어, 수열 A = {10, 30, 10, 20, 20, 10} 인 경우에 가장 긴 감소하는 부분 수열은 A = {30, 20, 10}  이고, 길이는 3이다.
+
+     입력
+     첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.
+
+     둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)
+
+     출력
+     첫째 줄에 수열 A의 가장 긴 감소하는 부분 수열의 길이를 출력한다.
+
+     예제 입력 1
+     6
+     10 30 10 20 20 10
+     예제 출력 1
+     3
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        System.out.println(solution(n, arr));
+    }
+
+    private int solution(int n, int[] arr) {
+        int[] dp = new int[n];
+
+        for (int i = 0; i < n ; i++) {
+            dp[i] = 1;
+
+            for (int j = 0; j < i; j++) {
+                if (arr[i] < arr[j] // 감소하면서
+                        && dp[i] < dp[j] + 1 // 이전 dp들 중 길이가 젤 길면 갱신
+                ) {
+                    dp[i] = dp[j] + 1;
+                }
+            }
+        }
+
+
+//        System.out.println(Arrays.toString(dp));
+
+        int max = 1;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] > max){
+                max = dp[i];
+            }
+        }
+        return max;
+    }
+}
+
+class DP11055 {
+    /**
+     가장 큰 증가하는 부분 수열
+
+     문제
+     수열 A가 주어졌을 때, 그 수열의 증가하는 부분 수열 중에서 합이 가장 큰 것을 구하는 프로그램을 작성하시오.
+
+     예를 들어, 수열 A = {1, 100, 2, 50, 60, 3, 5, 6, 7, 8} 인 경우에
+     합이 가장 큰 증가하는 부분 수열은 A = {1, 2, 50, 60} 이고, 합은 113이다.
+
+     입력
+     첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.
+
+     둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)
+
+     출력
+     첫째 줄에 수열 A의 합이 가장 큰 증가하는 부분 수열의 합을 출력한다.
+
+     예제 입력 1
+     10
+     1 100 2 50 60 3 5 6 7 8
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        System.out.println(solution(n, arr));
+    }
+
+    private int solution(int n, int[] arr) {
+        int[] dp = new int[n];
+
+        for (int i = 0; i < n ; i++) {
+            dp[i] = arr[i];
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j] // 증가하면서
+                        && dp[i] < dp[j] + arr[i] // 이전 dp 값 더하기 지금 값이 크면
+                ) {
+                    dp[i] = dp[j] + arr[i]; // 갱신
+                }
+            }
+        }
+
+//        System.out.println(Arrays.toString(dp));
+
+        int max = 1;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] > max){
+                max = dp[i];
+            }
+
+        }
+        return max;
+    }
+}
+
+class DP11053 {
+    /**
+     가장 긴 증가하는 부분 수열
+
+     문제
+     수열 A가 주어졌을 때, 가장 긴 증가하는 부분 수열을 구하는 프로그램을 작성하시오.
+
+     예를 들어, 수열 A = {10, 20, 10, 30, 20, 50} 인 경우에 가장 긴 증가하는 부분 수열은 A = {10, 20, 30, 50} 이고, 길이는 4이다.
+
+     입력
+     첫째 줄에 수열 A의 크기 N (1 ≤ N ≤ 1,000)이 주어진다.
+
+
+     둘째 줄에는 수열 A를 이루고 있는 Ai가 주어진다. (1 ≤ Ai ≤ 1,000)
+
+     출력
+     첫째 줄에 수열 A의 가장 긴 증가하는 부분 수열의 길이를 출력한다.
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        System.out.println(solution(n, arr));
+    }
+
+    private int solution(int n, int[] arr) {
+        int[] dp = new int[n];
+
+        for (int i = 0; i < n ; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        int max = -1;
+        for (int i = 0; i < n; i++) {
+            max = Math.max(dp[i], max);
+
+        }
+        return max;
+    }
+}
+
+
+class DP2156 {
+    /**
+     문제
+     효주는 포도주 시식회에 갔다. 그 곳에 갔더니,
+     테이블 위에 다양한 포도주가 들어있는 포도주 잔이 일렬로 놓여 있었다.
+     효주는 포도주 시식을 하려고 하는데, 여기에는 다음과 같은 두 가지 규칙이 있다.
+
+     포도주 잔을 선택하면 그 잔에 들어있는 포도주는 모두 마셔야 하고, 마신 후에는 원래 위치에 다시 놓아야 한다.
+     연속으로 놓여 있는 3잔을 모두 마실 수는 없다.
+     효주는 될 수 있는 대로 많은 양의 포도주를 맛보기 위해서 어떤 포도주 잔을 선택해야 할지 고민하고 있다.
+     1부터 n까지의 번호가 붙어 있는 n개의 포도주 잔이 순서대로 테이블 위에 놓여 있고, 각 포도주 잔에 들어있는 포도주의 양이 주어졌을 때,
+     효주를 도와 가장 많은 양의 포도주를 마실 수 있도록 하는 프로그램을 작성하시오.
+
+     예를 들어 6개의 포도주 잔이 있고, 각각의 잔에 순서대로 6, 10, 13, 9, 8, 1 만큼의 포도주가 들어 있을 때,
+     첫 번째, 두 번째, 네 번째, 다섯 번째 포도주 잔을 선택하면 총 포도주 양이 33으로 최대로 마실 수 있다.
+
+     입력
+     첫째 줄에 포도주 잔의 개수 n이 주어진다. (1 ≤ n ≤ 10,000)
+     둘째 줄부터 n+1번째 줄까지 포도주 잔에 들어있는 포도주의 양이 순서대로 주어진다. 포도주의 양은 1,000 이하의 음이 아닌 정수이다.
+
+     출력
+     첫째 줄에 최대로 마실 수 있는 포도주의 양을 출력한다.
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+
+        System.out.println(solution(n,arr));
+    }
+
+    private int solution(int n, int[] arr) {
+
+        int[] dp = new int[arr.length + 1];
+
+        if (n == 1) {
+            return arr[0];
+        }
+        else if (n==2) {
+            return arr[0] + arr[1];
+        } else{
+            dp[0] = 0;
+            dp[1] = arr[0];
+            dp[2] = arr[0] + arr[1];
+
+            for (int i = 3; i <= arr.length; i++) {
+                dp[i] = Math.max(Math.max(dp[i-1], dp[i-2] + arr[i-1]), dp[i-3] + arr[i-2] + arr[i-1]);
+            }
+//            System.out.println("Arrays.toString(dp) = " + Arrays.toString(dp));
+            return dp[n];
+        }
     }
 }
 
