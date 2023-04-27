@@ -7,7 +7,354 @@ import java.util.*;
 
 public class PMain {
     public static void main(String[] args) throws IOException {
-        new P1850().input();
+        new P2089().input();
+    }
+}
+
+class P2089 {
+    /**
+     -2진수 다국어
+
+     문제
+     -2진법은 부호 없는 2진수로 표현이 된다.
+     2진법에서는 2^0, 2^1, 2^2, 2^3이 표현 되지만 -2진법에서는 (-2)^0 = 1, (-2)^1 = -2, (-2)^2 = 4, (-2)^3 = -8을 표현한다.
+     10진수로 1부터 표현하자면 1, 110, 111, 100, 101, 11010, 11011, 11000, 11001 등이다.
+
+     10진법의 수를 입력 받아서 -2진수를 출력하는 프로그램을 작성하시오.
+
+     입력
+     첫 줄에 10진법으로 표현된 수 N이 주어진다.
+
+     출력
+     -2진법 수를 출력한다.
+
+     제한
+     -2,000,000,000 ≤ N ≤ 2,000,000,000
+     예제 입력 1
+     -13
+     예제 출력 1
+     110111
+     */
+
+    public void input() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringBuilder sb = new StringBuilder();
+
+
+        long input = scanner.nextLong();
+
+        if(input == 0){
+            System.out.println(0);
+        } else {
+            while (input != 1){
+                long na = input % -2;
+//                System.out.println("na = " + na);
+//                System.out.println(Math.ceil((float) input / (-2)));
+
+                sb.append(Math.abs(na));
+                input = (long) Math.ceil((double) input / (-2));
+            }
+
+            sb.append(input);
+
+            System.out.println(sb.reverse());
+        }
+    }
+}
+
+
+class P1212 {
+    /**
+     8진수 2진수
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	256 MB	40523	13587	11255	35.748%
+     문제
+     8진수가 주어졌을 때, 2진수로 변환하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 8진수가 주어진다. 주어지는 수의 길이는 333,334을 넘지 않는다.
+
+     출력
+     첫째 줄에 주어진 수를 2진수로 변환하여 출력한다. 수가 0인 경우를 제외하고는 반드시 1로 시작해야 한다.
+
+     예제 입력 1
+     314
+     예제 출력 1
+     11001100
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(solution(br.readLine()));
+
+    }
+
+    private String solution(String input) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            int a = c - '0';
+            String s = Integer.toString(a, 2);
+            if (s.length() == 1) {
+                s = "00" + s;
+            }
+            if (s.length() == 2) {
+                s = "0" + s;
+            }
+            sb.append(s);
+        }
+
+        String ret = sb.toString();
+        if (ret.charAt(0) == '0') {
+            ret = ret.substring(1);
+            if (ret.charAt(0) == '0') {
+                ret = ret.substring(1);
+            }
+        }
+
+        return ret;
+    }
+}
+
+class P1373 {
+    /**
+     2진수 8진수
+
+     문제
+     2진수가 주어졌을 때, 8진수로 변환하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 2진수가 주어진다. 주어지는 수의 길이는 1,000,000을 넘지 않는다.
+
+     출력
+     첫째 줄에 주어진 수를 8진수로 변환하여 출력한다.
+
+     예제 입력 1
+     11001100
+     예제 출력 1
+     314
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println(solution(br.readLine()));
+
+    }
+
+    private String solution(String input) {
+        StringBuilder sb = new StringBuilder();
+        // 세자리씩 끊었을 때 한 자리만 남았을 경우
+        if(input.length() % 3 == 1)
+            sb.append(input.charAt(0));
+        // 세자리씩 끊었을 때 두 자리만 남았을 경우
+        if(input.length() % 3 == 2)
+            sb.append((input.charAt(0) - '0') * 2 + (input.charAt(1) - '0'));
+
+        for(int i = input.length() % 3; i < input.length(); i+=3) {
+            sb.append((input.charAt(i) - '0') * 4 + (input.charAt(i+1) - '0') * 2 + (input.charAt(i+2) - '0'));
+        }
+
+        return sb.toString();
+    }
+}
+
+class P2745 {
+    /**
+     진법 변환
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	128 MB	18219	10129	8525	55.821%
+     문제
+     B진법 수 N이 주어진다. 이 수를 10진법으로 바꿔 출력하는 프로그램을 작성하시오.
+
+     10진법을 넘어가는 진법은 숫자로 표시할 수 없는 자리가 있다. 이런 경우에는 다음과 같이 알파벳 대문자를 사용한다.
+
+     A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
+
+     입력
+     첫째 줄에 N과 B가 주어진다. (2 ≤ B ≤ 36)
+
+     B진법 수 N을 10진법으로 바꾸면, 항상 10억보다 작거나 같다.
+
+     출력
+     첫째 줄에 B진법 수 N을 10진법으로 출력한다.
+
+     예제 입력 1
+     ZZZZZ 36
+     예제 출력 1
+     60466175
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        long result = solution(br.readLine());
+        System.out.println(result);
+
+    }
+
+    private long solution(String input) {
+
+        HashMap<String, Integer> map = new HashMap<>();
+        int result = 0;
+
+        for (int i = 0; i <= 9; i++) {
+            map.put(String.valueOf(i), i);
+        }
+        for (int i = 10; i <= 35; i++) {
+            map.put(String.valueOf((char) ('A' + i - 10)), i);
+        }
+        String[] s = input.split(" ");
+        String val = s[0];
+        int b = Integer.parseInt(s[1]);
+
+        int cnt = 1;
+        for (int i = val.length() - 1; i >= 0 ; i--) {
+            char c = val.charAt(i);
+            int v = map.get(String.valueOf(c));
+
+            result += v * cnt;
+            cnt *= b;
+        }
+
+
+        return result;
+    }
+}
+
+class P11005 {
+    /**
+     * 진법 변환 2
+     * 문제
+     * 10진법 수 N이 주어진다. 이 수를 B진법으로 바꿔 출력하는 프로그램을 작성하시오.
+     *
+     * 10진법을 넘어가는 진법은 숫자로 표시할 수 없는 자리가 있다. 이런 경우에는 다음과 같이 알파벳 대문자를 사용한다.
+     *
+     * A: 10, B: 11, ..., F: 15, ..., Y: 34, Z: 35
+     *
+     * 입력
+     * 첫째 줄에 N과 B가 주어진다. (2 ≤ B ≤ 36) N은 10억보다 작거나 같은 자연수이다.
+     *
+     * 출력
+     * 첫째 줄에 10진법 수 N을 B진법으로 출력한다.
+     *
+     * 예제 입력 1
+     * 60466175 36
+     * 예제 출력 1
+     * ZZZZZ
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        long[] arr = Arrays.stream(br.readLine().split(" ")).mapToLong(Long::parseLong).toArray();
+        String solution = solution(arr[0], arr[1]);
+        System.out.println(solution);
+
+    }
+
+    private String solution(long n, long b) {
+
+        HashMap<Long, Character> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 10; i <= 35; i++) {
+            map.put((long) i, (char) ('A' + i - 10));
+        }
+
+        long mok = n;
+        long na = 0;
+        while (n >= b) {
+            mok = n / b;
+            na =  n % b;
+
+            if (map.containsKey(na)) {
+                sb.append(map.get(na));
+            } else {
+                sb.append(na);
+            }
+            n = mok;
+        }
+
+        if (map.containsKey(mok)) {
+            sb.append(map.get(mok));
+        } else {
+            sb.append(mok);
+        }
+
+        return sb.reverse().toString();
+    }
+}
+
+class P9613 {
+    /**
+     * GCD 합 다국어
+     * 시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     * 1 초	128 MB	31334	12612	10326	41.095%
+     * 문제
+     * 양의 정수 n개가 주어졌을 때, 가능한 모든 쌍의 GCD의 합을 구하는 프로그램을 작성하시오.
+     *
+     * 입력
+     * 첫째 줄에 테스트 케이스의 개수 t (1 ≤ t ≤ 100)이 주어진다. 각 테스트 케이스는 한 줄로 이루어져 있다.
+     * 각 테스트 케이스는 수의 개수 n (1 < n ≤ 100)가 주어지고, 다음에는 n개의 수가 주어진다. 입력으로 주어지는 수는 1,000,000을 넘지 않는다.
+     *
+     * 출력
+     * 각 테스트 케이스마다 가능한 모든 쌍의 GCD의 합을 출력한다.
+     *
+     * 예제 입력 1
+     3
+     4 10 20 30 40
+     3 7 5 12
+     3 125 15 25
+     * 예제 출력 1
+     * 70
+     * 3
+     * 35
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            int[] input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            long sol = solution(input);
+
+            sb.append(sol).append("\n");
+        }
+
+        System.out.println(sb);
+
+    }
+
+    private long  solution(int[] input) {
+
+        long answer = 0;
+        for (int i = 1; i < input.length - 1; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                int gcd = gcd(input[i], input[j]);
+                answer += gcd;
+
+            }
+        }
+        return answer;
+    }
+
+    private int gcd(int a, int b) {
+        int temp = 0;
+        if (a < b) {
+            temp = a;
+            a = b;
+            b = temp;
+        }
+        while(b!=0) {
+            int n = a % b;
+            a = b;
+            b = n;
+        }
+        return a;
     }
 }
 
