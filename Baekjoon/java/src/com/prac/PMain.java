@@ -11,6 +11,384 @@ public class PMain {
     }
 }
 
+class P2004 {
+    /**
+     조합 0의 개수
+
+     순열 : n! / (n-r)! * r!
+
+     예제 입력 1
+     25 12
+     예제 출력 1
+     2
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int[] array = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        sol(array[0], array[1]);
+    }
+
+    private void sol(int n, int r) {
+        long a = count2(n) - count2(r) - count2(n - r);
+        long b = count5(n) - count5(r) - count5(n - r);
+
+        System.out.println(Math.min(a, b));
+    }
+
+    private long count2(long num) {
+        long count = 0;
+
+        while (num >= 2) {
+            count += num / 2;
+            num /= 2;
+        }
+
+        return count;
+    }
+
+    private long count5(long num) {
+        long count = 0;
+
+        while (num >= 5) {
+            count += num / 5;
+            num /= 5;
+        }
+
+        return count;
+    }
+}
+
+class P1676 {
+    /**
+     * 팩토리얼 0의 개수
+     * 시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     * 2 초	128 MB	61290	29477	24441	47.862%
+     * <p>
+     * 문제
+     * N!에서 뒤에서부터 처음 0이 아닌 숫자가 나올 때까지 0의 개수를 구하는 프로그램을 작성하시오.
+     * <p>
+     * 입력
+     * 첫째 줄에 N이 주어진다. (0 ≤ N ≤ 500)
+     * <p>
+     * 출력
+     * 첫째 줄에 구한 0의 개수를 출력한다.
+     * <p>
+     * 예제 입력 1
+     * 10
+     * 예제 출력 1
+     * 2
+     * 예제 입력 2
+     * 3
+     * 예제 출력 2
+     * 0
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        sol(n);
+    }
+
+    private void sol(int n) {
+
+        int twoCnt = 0;
+        int fiveCnt = 0;
+
+        for(int i=2;i<=n;i++) {
+            int x = i;
+
+            while (x % 2 == 0) {
+                x = x / 2;
+                twoCnt++;
+            }
+
+            while (x % 5 == 0) {
+                x = x / 5;
+                fiveCnt++;
+            }
+        }
+
+        System.out.println(Math.min(twoCnt, fiveCnt));
+    }
+}
+
+class P10872 {
+    /**
+     팩토리얼
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	256 MB	151045	80266	65656	53.318%
+     문제
+     0보다 크거나 같은 정수 N이 주어진다. 이때, N!을 출력하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 정수 N(0 ≤ N ≤ 12)이 주어진다.
+
+     출력
+     첫째 줄에 N!을 출력한다.
+
+     예제 입력 1
+     10
+     예제 출력 1
+     3628800
+     예제 입력 2
+     0
+     예제 출력 2
+     1
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        solve(n);
+    }
+
+    private void solve(int n) {
+        long result = 1;
+
+        for (int i = 1; i <= n ; i++) {
+            result *= i;
+        }
+        System.out.println(result);
+    }
+}
+
+class P11653 {
+    /**
+     소인수분해
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     1 초	256 MB	88881	48108	37299	52.696%
+     문제
+     정수 N이 주어졌을 때, 소인수분해하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 정수 N (1 ≤ N ≤ 10,000,000)이 주어진다.
+
+     출력
+     N의 소인수분해 결과를 한 줄에 하나씩 오름차순으로 출력한다. N이 1인 경우 아무것도 출력하지 않는다.
+
+     예제 입력 1
+     72
+     예제 출력 1
+     2
+     2
+     2
+     3
+     3
+     예제 입력 2
+     3
+     예제 출력 2
+     3
+     예제 입력 3
+     6
+     예제 출력 3
+     2
+     3
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        long n = Long.parseLong(br.readLine());
+        solve(n);
+    }
+
+    private void solve(long n) {
+        for (long i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+                System.out.println(i);
+                n = n / i;
+            }
+        }
+
+        if (n != 1) {
+            System.out.println(n);
+        }
+    }
+}
+
+class P6588 {
+    /**
+     골드바흐의 추측 다국어
+
+     문제
+     1742년, 독일의 아마추어 수학가 크리스티안 골드바흐는 레온하르트 오일러에게 다음과 같은 추측을 제안하는 편지를 보냈다.
+
+     4보다 큰 모든 짝수는 두 홀수 소수의 합으로 나타낼 수 있다.
+
+     예를 들어 8은 3 + 5로 나타낼 수 있고, 3과 5는 모두 홀수인 소수이다.
+     또, 20 = 3 + 17 = 7 + 13, 42 = 5 + 37 = 11 + 31 = 13 + 29 = 19 + 23 이다.
+
+     이 추측은 아직도 해결되지 않은 문제이다.
+
+     백만 이하의 모든 짝수에 대해서, 이 추측을 검증하는 프로그램을 작성하시오.
+
+     입력
+     입력은 하나 또는 그 이상의 테스트 케이스로 이루어져 있다. 테스트 케이스의 개수는 100,000개를 넘지 않는다.
+
+     각 테스트 케이스는 짝수 정수 n 하나로 이루어져 있다. (6 ≤ n ≤ 1000000)
+
+     입력의 마지막 줄에는 0이 하나 주어진다.
+
+     출력
+     각 테스트 케이스에 대해서, n = a + b 형태로 출력한다. 이때, a와 b는 홀수 소수이다.
+     숫자와 연산자는 공백 하나로 구분되어져 있다. 만약, n을 만들 수 있는 방법이 여러 가지라면, b-a가 가장 큰 것을 출력한다.
+     또, 두 홀수 소수의 합으로 n을 나타낼 수 없는 경우에는 "Goldbach's conjecture is wrong."을 출력한다.
+
+     예제 입력 1
+     8
+     20
+     42
+     0
+     예제 출력 1
+     8 = 3 + 5
+     20 = 3 + 17
+     42 = 5 + 37
+     */
+
+    public void input() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
+
+        boolean[] isPrime = new boolean[1000001];
+        isPrime[0] = true; // 소수를 false로 함
+        isPrime[1] = true;
+        // 처음엔 다 prime(false)으로 세팅
+        // 배수는 prime이 아니므로 true
+        for (int i = 2; i <= (int) Math.sqrt(1000000); i++) {
+            for (int j = 2; i * j < 1000001; j++) {
+                isPrime[i * j] = true; // 소수가 아님
+            }
+        }
+
+        while (true){
+            boolean test = false;
+
+            int n = Integer.parseInt(br.readLine());
+            if (n == 0) {
+                break;
+            }
+
+            for (int i = 3; i <= n / 2; i += 2) {
+                if (!isPrime[i] && !isPrime[n - i]) {
+                    System.out.println(n + " = " +  i + " + " + (n - i));
+                    test = true;
+                    break;
+                }
+            }
+
+            if (!test) {
+                System.out.println("Goldbach's conjecture is wrong.");
+            }
+        }
+    }
+}
+
+class P1929 {
+    /**
+     소수 구하기
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     2 초	256 MB	237986	68226	47893	26.792%
+     문제
+     M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오.
+
+     입력
+     첫째 줄에 자연수 M과 N이 빈 칸을 사이에 두고 주어진다. (1 ≤ M ≤ N ≤ 1,000,000) M이상 N이하의 소수가 하나 이상 있는 입력만 주어진다.
+
+     출력
+     한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.
+
+     예제 입력 1
+     3 16
+     예제 출력 1
+     3
+     5
+     7
+     11
+     13
+     */
+
+    public void input() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int start = scanner.nextInt();
+        int end = scanner.nextInt();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            if (isPrime(i)) sb.append(i + "\n");
+        }
+        System.out.println(sb);
+
+    }
+
+    private boolean isPrime(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class P1978 {
+    /**
+     소수 찾기
+     시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
+     2 초	128 MB	168420	78852	62993	46.660%
+     문제
+     주어진 수 N개 중에서 소수가 몇 개인지 찾아서 출력하는 프로그램을 작성하시오.
+
+     입력
+     첫 줄에 수의 개수 N이 주어진다. N은 100이하이다. 다음으로 N개의 수가 주어지는데 수는 1,000 이하의 자연수이다.
+
+     출력
+     주어진 수들 중 소수의 개수를 출력한다.
+
+     예제 입력 1
+     4
+     1 3 5 7
+     예제 출력 1
+     3
+     */
+
+    public void input() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+
+        int result = 0;
+
+        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        for (int i : arr) {
+            if (isPrime(i)) result ++;
+        }
+        System.out.println(result);
+
+    }
+
+    private boolean isPrime(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 class P2089 {
     /**
      -2진수 다국어
